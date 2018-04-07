@@ -43,12 +43,12 @@ class App extends React.Component{
 
   handleClick({target}) {
     
-    console.log(`querying POLY for ${target.value} models`);
-    
-    Axios.post(`storeObjects`, {topic: target.value})
+    console.log(`querying POLY for ${target.id} models`);
+  
+    Axios.post(`storeObjects`, {topic: target.id})
       .then((data) => {
         console.log(`has the post succeeded? ${JSON.stringify(data)}`);
-        this.fetchObjects(target.value);
+        this.fetchObjects(target.id);
       })
       .catch((err) => {
         console.error(`fetch is broken with error: ${err}`);
@@ -69,33 +69,63 @@ class App extends React.Component{
     console.log(`rendering`);
 
     return (
-      <div>
-        <h1>
-          POLY<span style={{fontStyle: `italic`}}>got</span>
-        </h1>
-        <div>
-          <div>What kinds of 3D Assets do you want?</div>
-          {this.state.queryOpts.map((topic) => (
-            <FetchButton value={topic} clickHandler={this.handleClick} />
-          ))}
-        </div>
-        <div>
-          {this.state.objectList.map((asset) => {
-            // console.log(`asset format: ${JSON.stringify(asset.format[0])}, asset key: ${asset.thumbnail.url}`)
-            return (
-              <Object3DAsset 
-                imgSRC={asset.thumbnail.url} 
-                name={asset.displayName} 
-                objLink={asset.format[0].root.url} 
-                mtlLink={asset.format[0].resources[0].url}
-                key={asset._id}
-                desc={asset.description}
-                creator={asset.creator}  
-              ></Object3DAsset>
-            );
-          })}
-        </div>
-      </div>
+      <article>
+        <section className="hero is-primary">
+
+          <div className="hero-head" style={{paddingTop: `24px`}}>
+            <div className="container has-text-centered">
+              <h1 className="title is-1">
+                POLY<span style={{ fontStyle: `italic` }}>got</span>
+              </h1>
+              <h2 className="subtitle">
+                For all your 3D assetGrabbing needs.
+              </h2>
+            </div>
+          </div>
+
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <h2 className="subtitle is-2">
+                What kind of assets do you need?
+              </h2>
+            </div>
+          </div>
+
+          <div class="hero-foot">
+            <nav class="tabs is-boxed is-fullwidth">
+              <div class="container ">
+                <ul>
+                  {this.state.queryOpts.map((topic) => (
+                    <FetchButton value={topic} clickHandler={this.handleClick} />
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+        </section>
+
+
+        <section className="section">
+          <div className="container">
+            {this.state.objectList.map((asset) => {
+              // console.log(`asset format: ${JSON.stringify(asset.format[0])}, asset key: ${asset.thumbnail.url}`)
+              return (
+                <Object3DAsset
+                  imgSRC={asset.thumbnail.url}
+                  name={asset.displayName}
+                  objLink={asset.format[0].root.url}
+                  mtlLink={asset.format[0].resources[0].url}
+                  key={asset._id}
+                  desc={asset.description}
+                  creator={asset.creator}
+                ></Object3DAsset>
+              );
+            })}
+          </div>
+        </section>
+
+      </article>
     );
   }
 

@@ -1,7 +1,11 @@
 import React from 'react';
 
 const FetchButton = ({value, clickHandler}) => 
- ( <button value={value} onClick={clickHandler}>{value}</button>)
+  (
+      <li>
+        <a id={value} onClick={clickHandler}>{value}</a>
+      </li>
+  );
   // <button>dummy</button>
 
 
