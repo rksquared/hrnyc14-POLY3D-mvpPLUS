@@ -31,10 +31,10 @@ const object3DAsset = ({imgSRC, name, objLink, mtlLink, desc, creator, key}) => 
             {/* <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> */}
             <div className="columns" style={{paddingTop: `8px`}}>
               <div className="column is-narrow">
-                <a href={objLink} download><button className="button is-rounded is-small is-link">Download the OBJ file</button></a>
+                <a href={objLink} download><button className="button is-rounded is-small is-link"><span class="icon is-large" style={{paddingRight: `10px`}}><i class="fas fa-arrow-down" ></i></span>Download the OBJ file</button></a>
               </div>
               <div className="column is-narrow">
-                <a href={mtlLink} download><button className="button is-rounded is-small is-link">Download the MTL file</button></a>
+                <a href={mtlLink} download><button className="button is-rounded is-small is-link"><span class="icon is-large" style={{paddingRight: `10px`}}><i class="fas fa-arrow-down"></i></span>Download the MTL file</button></a>
               </div>
             </div>
           </div>

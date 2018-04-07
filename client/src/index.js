@@ -91,9 +91,9 @@ class App extends React.Component{
             </div>
           </div>
 
-          <div class="hero-foot">
-            <nav class="tabs is-boxed is-fullwidth">
-              <div class="container ">
+          <div className="hero-foot">
+            <nav className="tabs is-boxed is-fullwidth">
+              <div className="container ">
                 <ul>
                   {this.state.queryOpts.map((topic) => (
                     <FetchButton currentFilter={this.state.filterParam} value={topic} clickHandler={this.handleClick} />
