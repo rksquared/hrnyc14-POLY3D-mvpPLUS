@@ -1,8 +1,8 @@
 import React from 'react';
 
-const FetchButton = ({value, clickHandler}) => 
+const FetchButton = ({value, clickHandler, currentFilter}) => 
   (
-      <li>
+      <li className={currentFilter === value ? 'is-active': ''}>
         <a id={value} onClick={clickHandler}>{value}</a>
       </li>
   );

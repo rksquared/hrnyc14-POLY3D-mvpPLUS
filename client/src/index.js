@@ -33,7 +33,7 @@ class App extends React.Component{
           objectList: data,
           filterParam: data[0].category
         });
-        
+
         console.log(`objectList in state: ${JSON.stringify(this.state.objectList)}`);
       })
       .catch((err) => {
@@ -41,11 +41,11 @@ class App extends React.Component{
       })
   }
 
-  handleClick({target}) {
-    
+  handleClick({ target }) {
+
     console.log(`querying POLY for ${target.id} models`);
-  
-    Axios.post(`storeObjects`, {topic: target.id})
+
+    Axios.post(`storeObjects`, { topic: target.id })
       .then((data) => {
         console.log(`has the post succeeded? ${JSON.stringify(data)}`);
         this.fetchObjects(target.id);
@@ -53,7 +53,7 @@ class App extends React.Component{
       .catch((err) => {
         console.error(`fetch is broken with error: ${err}`);
       });
-    
+
   }
 
   componentDidMount() {
@@ -64,7 +64,7 @@ class App extends React.Component{
     console.log(`Application component mounted!`);
   }
 
-  render () {
+  render() {
     //log each time it renders
     console.log(`rendering`);
 
@@ -72,7 +72,7 @@ class App extends React.Component{
       <article>
         <section className="hero is-primary">
 
-          <div className="hero-head" style={{paddingTop: `24px`}}>
+          <div className="hero-head" style={{ paddingTop: `24px` }}>
             <div className="container has-text-centered">
               <h1 className="title is-1">
                 POLY<span style={{ fontStyle: `italic` }}>got</span>
@@ -96,7 +96,7 @@ class App extends React.Component{
               <div class="container ">
                 <ul>
                   {this.state.queryOpts.map((topic) => (
-                    <FetchButton value={topic} clickHandler={this.handleClick} />
+                    <FetchButton currentFilter={this.state.filterParam} value={topic} clickHandler={this.handleClick} />
                   ))}
                 </ul>
               </div>
@@ -108,22 +108,30 @@ class App extends React.Component{
 
         <section className="section">
           <div className="container">
-            {this.state.objectList.map((asset) => {
-              // console.log(`asset format: ${JSON.stringify(asset.format[0])}, asset key: ${asset.thumbnail.url}`)
-              return (
-                <Object3DAsset
-                  imgSRC={asset.thumbnail.url}
-                  name={asset.displayName}
-                  objLink={asset.format[0].root.url}
-                  mtlLink={asset.format[0].resources[0].url}
-                  key={asset._id}
-                  desc={asset.description}
-                  creator={asset.creator}
-                ></Object3DAsset>
-              );
-            })}
+            <div className="columns is-multiline is-mobile">
+              {this.state.objectList.map((asset) => {
+                // console.log(`asset format: ${JSON.stringify(asset.format[0])}, asset key: ${asset.thumbnail.url}`)
+                return (
+                  <Object3DAsset className="column is-half"
+                    imgSRC={asset.thumbnail.url}
+                    name={asset.displayName}
+                    objLink={asset.format[0].root.url}
+                    mtlLink={asset.format[0].resources[0].url}
+                    key={asset._id}
+                    desc={asset.description}
+                    creator={asset.creator}
+                  ></Object3DAsset>
+                );
+              })}
+            </div>
           </div>
         </section>
+
+
+
+
+
+
 
       </article>
     );
