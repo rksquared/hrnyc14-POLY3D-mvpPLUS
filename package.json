@@ -23,6 +23,8 @@
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
+    "file-loader": "^1.1.11",
+    "url-loader": "^1.0.1",
     "webpack": "^2.2.1"
   },
   "dependencies": {
@@ -33,7 +35,8 @@
     "nodemon": "^1.17.3",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "three": "^0.91.0"
   },
   "bugs": {
     "url": "https://github.com/rksquared/hrnyc14-POLY3D-mvp/issues"
