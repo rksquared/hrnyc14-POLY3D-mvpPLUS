@@ -3,7 +3,7 @@ import React from 'react';
 const object3DAsset = ({imgSRC, name, objLink, mtlLink, desc, creator, clickHandler}) => {
   // console.log(`img ${JSON.stringify(img SRC)}`)
   return (
-    <div className="column is-half" onClick={clickHandler}>
+    <div className="column is-half" >
       <div className="card" style={{ borderRadius: `4px` }}>
         <div className="card-image">
           <figure className="image is-4by3">
@@ -35,6 +35,9 @@ const object3DAsset = ({imgSRC, name, objLink, mtlLink, desc, creator, clickHand
               <div className="column is-narrow">
                 <a href={mtlLink} download><button className="button is-rounded is-small is-link"><span className="icon is-large" style={{paddingRight: `10px`}}><i className="fas fa-arrow-down"></i></span>Download the MTL file</button></a>
               </div>
+            </div>
+            <div className="column is-narrow" onClick={clickHandler}>
+              <button className="button is-rounded is-small is-link"><span className="icon is-large" style={{ paddingRight: `10px` }}><i className="fas fa-arrow-down"></i></span>View in 3D!</button>
             </div>
           </div>
         </div>
