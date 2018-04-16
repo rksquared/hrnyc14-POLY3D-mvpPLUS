@@ -1,54 +1,88 @@
 import React from 'react';
 import * as THREE from 'three';
 
+
 class Object3DScene extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.sceneConstructor = this.sceneConstructor.bind(this);
+    this.start = this.start.bind(this)
+    this.stop = this.stop.bind(this)
+    this.animate = this.animate.bind(this)
   }
 
+  componentDidMount() {
+    const width = this.mount.clientWidth
+    const height = this.mount.clientHeight
 
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      width / height,
+      0.1,
+      1000
+    )
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    const geometry = new THREE.BoxGeometry(1, 1, 1)
+    const material = new THREE.MeshBasicMaterial({ color: '#433F81' })
+    const cube = new THREE.Mesh(geometry, material)
 
-  sceneConstructor() {
-    let scene = new THREE.Scene();
-    let camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, .1, 1000);
+    camera.position.z = 4
+    scene.add(cube)
+    renderer.setClearColor('#000000')
+    renderer.setSize(width, height)
 
-    let renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+    this.scene = scene
+    this.camera = camera
+    this.renderer = renderer
+    this.material = material
+    this.cube = cube
 
+    this.mount.appendChild(this.renderer.domElement)
+    this.start()
+  }
 
-    document.body.appendChild(renderer.domElement);
+  componentWillUnmount() {
+    this.stop()
+    this.mount.removeChild(this.renderer.domElement)
+  }
 
-    let geometry = new THREE.BoxGeometry(.5, 1, 1);
-    let material = new THREE.MeshBasicMaterial({ color: 'blue' });
-    let cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+  start() {
+    if (!this.frameId) {
+      this.frameId = requestAnimationFrame(this.animate)
+    }
+  }
 
-    camera.position.z = 5;
+  stop() {
+    cancelAnimationFrame(this.frameId)
+  }
 
-    let animate = function () {
-      requestAnimationFrame(animate);
+  animate() {
+    this.cube.rotation.x += 0.01
+    this.cube.rotation.y += 0.01
 
-      cube.rotation.x += 0.05;
-      cube.rotation.y += 0.1;
+    this.renderScene()
+    this.frameId = window.requestAnimationFrame(this.animate)
+  }
 
-      renderer.render(scene, camera);
-    };
-
-    animate();
+  renderScene() {
+    this.renderer.render(this.scene, this.camera)
   }
 
   render() {
     return (
-      <div onClick={this.props.clickHandler}>
-        <div >
-          {this.sceneConstructor()}
+      <div>
+        <div
+          style={{ width: '400px', height: '400px' }}
+          ref={(mount) => { this.mount = mount }}
+        />
+        <div className="column is-narrow" onClick={this.props.clickHandler}>
+          <button className="button is-rounded is-small is-link"><span className="icon is-large" style={{ paddingRight: `10px` }}><i className="fas fa-arrow-down"></i></span>Back to AssetView!</button>
         </div>
       </div>
-    );
+    )
   }
-}
 
+}
 
 export default Object3DScene;

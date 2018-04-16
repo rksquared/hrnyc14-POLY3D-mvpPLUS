@@ -13,7 +13,6 @@ export default class AssetListEntry extends Component {
   }
 
   clickHandler() {
-    console.log('click registered');
     this.setState({
       toggleScene: !this.state.toggleScene
     });
@@ -22,13 +21,15 @@ export default class AssetListEntry extends Component {
 
   render() {
     let asset = this.props.asset;
-
+    
     if (this.state.toggleScene) {
       return (
-        <Object3DScene 
-          clickHandler={this.clickHandler}
-          className="column is-half"
-        />
+        <div>
+          <Object3DScene 
+            clickHandler={this.clickHandler}
+            className="column is-half"
+          />
+        </div>
       );
     } else {
       return (
