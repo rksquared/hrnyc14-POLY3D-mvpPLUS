@@ -28,6 +28,8 @@ export default class AssetListEntry extends Component {
           <Object3DScene 
             clickHandler={this.clickHandler}
             className="column is-half"
+            objLink={asset.format[0].root.url}
+            mtlLink={asset.format[0].resources[0].url}
           />
         </div>
       );

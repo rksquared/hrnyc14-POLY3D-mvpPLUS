@@ -37,7 +37,7 @@ const object3DAsset = ({imgSRC, name, objLink, mtlLink, desc, creator, clickHand
               </div>
             </div>
             <div className="column is-narrow" onClick={clickHandler}>
-              <button className="button is-rounded is-small is-link"><span className="icon is-large" style={{ paddingRight: `10px` }}><i className="fas fa-arrow-down"></i></span>View in 3D!</button>
+              <button className="button is-rounded is-medium is-link"><span className="icon is-large" style={{ paddingRight: `10px` }}><i className="fas fa-arrow-down"></i></span>View in 3D!</button>
             </div>
           </div>
         </div>
